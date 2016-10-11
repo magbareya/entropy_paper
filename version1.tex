@@ -1,6 +1,8 @@
 \documentclass{article}
 \usepackage{amsfonts}
 \usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
 \setcounter{section}{-1}
 
 \author{Mahmoud Agbareya}
@@ -49,7 +51,7 @@
 				\begin{equation} \label{detailedConst}
 					\sum_{i \in \{0,1, \dots , n\} \backslash \{k\}} a_i^2 
 					\leq 2d^4log_2(2/d) 
-					\leq 2 \cdot \left( 9 + \sqrt{17} \right) ^ 2 \cdot \rho^4 \cdot log_2(2/\rho)
+					\leq 2 \left( 9 + \sqrt{17} \right) ^ 2 \cdot \rho^4 log_2(2/\rho)
 				\end{equation}
 	
 	
@@ -57,15 +59,15 @@
 		\subsection{Theorem 5.5}
 			Depending on (\ref{detailedConst}) we can restate theorem 5.5 to the following form:
 			\paragraph{Theorem 5.5:} \textit{For $ g: \{0,1\}^n \rightarrow \{-1,1\}$, let $\rho = \left( \sum_{A \subseteq [n]: |A| \geq 2} \hat{g}^2(A) \right) ^ {1/2} $. Then there exists some $ B \subseteq [n]$ with $|B| \leq 1$ such that:}
-				$$  \sum_{A \subseteq [n]: |A| \leq 1, A \neq B} \hat{g}^2 (A) \leq 2 \cdot \left( 9 + \sqrt{17} \right)^2 \cdot \rho^4 \cdot log \left( \frac{2}{\rho} \right) $$
+				$$  \sum_{A \subseteq [n]: |A| \leq 1, A \neq B} \hat{g}^2 (A) \leq 2 \left( 9 + \sqrt{17} \right)^2 \cdot \rho^4 log \left( \frac{2}{\rho} \right) $$
 	
 		\subsection{Equation (20)}
 			It is true with $L=2$ :
 			\begin{equation} \label{eq:20}
 				\sum_{|A| \geq 2} \hat{f}^2 (A) 
 				\leq \sum_{|A| \geq 2} \hat{g}^2 (A) 
-				\leq 1 - \hat{g}^2(\{1\}) = 1 - \left( 1 + \gamma^2 - 2 \cdot \gamma \right) = 2 \cdot \gamma - \gamma^2 
-				\leq 2 \cdot \gamma
+				\leq 1 - \hat{g}^2(\{1\}) = 1 - \left( 1 + \gamma^2 - 2 \gamma \right) = 2 \gamma - \gamma^2 
+				\leq 2 \gamma
 			\end{equation}
 	
 		\subsection{Equation (21)}
@@ -83,7 +85,7 @@
 				& \leq \frac{2}{ln2} \cdot \frac{1}{\mathbb{E} f} \cdot \sum_{S, 1 \notin S} |S| \lambda^{|S|} \hat{f}^2(S) \\
 				& \leq \frac{4}{ln2} \cdot \left( \sum_{|S| \geq 2} |S| \lambda^{|S|} \hat{f}^2(S) + \sum_{k=2}^n \hat{f}^2 \left( \{k\} \right) \cdot \lambda \right) \\
 				& \leq \frac{4}{ln2}  \cdot \left( 2 \lambda^2 \cdot \sum_{|S| \geq 2} \hat{f}^2(S) + \lambda \cdot \sum_{k=2}^n \hat{f}^2 \left( \{k\} \right) \right) \\
-				& \leq \frac{4}{ln2} \cdot \left( 4 ( \lambda^2 \cdot \gamma ) + \left( 9 + \sqrt{17} \right)^2 \cdot \left( \lambda \cdot \gamma^2 log \left( \frac{1}{\gamma} \right) \right) \right)
+				& \leq \frac{4}{ln2} \cdot \left( 4 ( \lambda^2 \gamma ) + \left( 9 + \sqrt{17} \right)^2 \cdot \left( \lambda \gamma^2 log \left( \frac{1}{\gamma} \right) \right) \right)
 			\end{aligned}
 			\end{equation}
 			I think we require here (in the 3rd line) that $\lambda \leq 2/3$.
@@ -91,10 +93,26 @@
 		\subsection{Proof of Lemma 5.1}
 			\subsubsection{Equation 22}
 				\begin{equation}
-					\mathbb{E}_{T,1 \in T} Ent \left( g_T | x_1 = 0,x_2, \cdots, x_n \right) \leq L \cdot \lambda \cdot \gamma
+					\mathbb{E}_{T,1 \in T} Ent \left( g_T | x_1 = 0,x_2, \cdots, x_n \right) \leq L \cdot \lambda \gamma
 			\end{equation}
             
-			\paragraph{Proof}
+			\begin{proof}
+				Depending on (\ref{eq:20}) and (\ref{eq:21}), and in similar way as the proof of (\ref{lemma5:2}) we have:
+				\begin{equation} \label{boundForR}
+					\sum_{R, 1 \notin R} |R| \lambda^{|R|} \hat{f}^2(R) 
+					\leq 4 ( \lambda^2 \gamma ) + \left( 9 + \sqrt{17} \right)^2 \cdot \left( \lambda \gamma^2 log \left( \frac{1}{\gamma} \right) \right)
+				\end{equation}
+
+				Also
+				
+				\begin{equation} \label{boundForR+1}
+					\sum_{R, 1 \notin R} |R| \lambda^{|R|} \hat{f}^2(R \cup \{1\}) 
+					\leq 2 \cdot \lambda \cdot \sum_{R, 1 \notin R} \hat{f}^2(R \cup \{1\})
+					\leq 2 \cdot \lambda \cdot \sum_{|R| \geq 2} \hat{f}^2(R)
+					\leq 4 \cdot \lambda \gamma
+				\end{equation}
+				
+				In addition, we have:
 				\begin{equation} \label{entGtX0} \begin{aligned}
 					Ent \left( g_T | x_1 = 0,x_2, \cdots, x_n \right) 
 					& \leq \frac{2}{ln 2} \cdot \frac{1}{\mathbb{E} f} \cdot \sum_{R \subseteq {T\backslash \{1\}}} |R| \cdot \left( \hat{f} (R) + \hat{f} (R \cup \{1\}) \right)^2 \\ 
@@ -102,10 +120,14 @@
 					& \leq \frac{8}{ln 2} \cdot \sum_{R \subseteq {T\backslash \{1\}}} |R| \cdot \left( \hat{f}^2 (R) + \hat{f}^2 (R \cup \{1\}) \right)
 				\end{aligned}
 				\end{equation}
-				    
-				Depending on (\ref{eq:20}) and (\ref{eq:21}), and in similar way as the proof of (\ref{lemma5:2}) we have:
-				\begin{equation}
-					\sum_{R, 1 \notin R} |R| \lambda^{|R|} \hat{f}^2(R) \leq 4 ( \lambda^2 \cdot \gamma ) + \left( 9 + \sqrt{17} \right)^2 \cdot \left( \lambda \cdot \gamma^2 log \left( \frac{1}{\gamma} \right) \right)
+				
+				Averaging over $T$ and depending on (\ref{boundForR}), (\ref{boundForR+1}) and (\ref{entGtX0}) we have:
+				\begin{equation} \label{final22} \begin{aligned}
+					\mathbb{E}_{T, 1 \notin T} Ent \left( g_T | x_1 = 0,x_2, \cdots, x_n \right)
+					& \leq \frac{8}{ln 2} \cdot \left( \left( 4 ( \lambda^2 \gamma ) + \left( 9 + \sqrt{17} \right)^2 \cdot \left( \lambda \gamma^2 log \left( \frac{1}{\gamma} \right) \right) \right)  + 4 \cdot \lambda \gamma \right) \\
+					& \leq \frac{8}{ln 2} \cdot \left( 4 \cdot \lambda \gamma + 64 \cdot \lambda \gamma + 4 \cdot \lambda \gamma \right) \\
+					& = \frac{576}{ln 2} \cdot \lambda \gamma < 831 \cdot \lambda \gamma
+				\end{aligned}			
 				\end{equation}
-			
+			\end{proof}
 \end{document}
