@@ -55,6 +55,7 @@
 				\end{equation}
 	
 	
+	\newpage
 	\section{On the entropy of a noisy function (Alex's paper)}
 		\subsection{Theorem 5.5}
 			Depending on (\ref{detailedConst}) we can restate theorem 5.5 to the following form:
@@ -81,20 +82,21 @@
 		\subsection{Proof of Lemma 5.2}
 			The first inequality appears in proof of lemma 5.2, so, depending on (\ref{eq:20}) and (\ref{eq:21}) we have:
 			\begin{equation} \label{lemma5:2}\begin{aligned}
-				\mathbb{E}_{T, 1 \notin T} Ent(g_T)
+				\mathop{\mathbb{E}}_{T, 1 \notin T} Ent(g_T)
 				& \leq \frac{2}{ln2} \cdot \frac{1}{\mathbb{E} f} \cdot \sum_{S, 1 \notin S} |S| \lambda^{|S|} \hat{f}^2(S) \\
 				& \leq \frac{4}{ln2} \cdot \left( \sum_{|S| \geq 2} |S| \lambda^{|S|} \hat{f}^2(S) + \sum_{k=2}^n \hat{f}^2 \left( \{k\} \right) \cdot \lambda \right) \\
 				& \leq \frac{4}{ln2}  \cdot \left( 2 \lambda^2 \cdot \sum_{|S| \geq 2} \hat{f}^2(S) + \lambda \cdot \sum_{k=2}^n \hat{f}^2 \left( \{k\} \right) \right) \\
 				& \leq \frac{4}{ln2} \cdot \left( 4 ( \lambda^2 \gamma ) + \left( 9 + \sqrt{17} \right)^2 \cdot \left( \lambda \gamma^2 log \left( \frac{1}{\gamma} \right) \right) \right)
 			\end{aligned}
 			\end{equation}
-			I think we require here (in the 3rd line) that $\lambda \leq 2/3$.
-
+			%I think we require here (in the 3rd line) that $\lambda \leq 2/3$.
+		
+		\newpage
 		\subsection{Proof of Lemma 5.1}
 			\subsubsection{Equation 22}
 				\begin{equation}
-					\mathbb{E}_{T,1 \in T} Ent \left( g_T | x_1 = 0,x_2, \cdots, x_n \right) \leq L \cdot \lambda \gamma
-			\end{equation}
+					\mathop{\mathbb{E}}_{T,1 \in T} Ent \left( g_T \mid x_1 = 0,x_2, \cdots, x_n \right) \leq L \cdot \lambda \gamma
+				\end{equation}
             
 			\begin{proof}
 				Depending on (\ref{eq:20}) and (\ref{eq:21}), and in similar way as the proof of (\ref{lemma5:2}) we have:
@@ -112,9 +114,18 @@
 					\leq 4 \cdot \lambda \gamma
 				\end{equation}
 				
-				In addition, we have:
+				If we fix a subset $T \subset [n]$ with $1 \in T$, then:
+				\begin{equation} \label{g_T with x1=0}
+					\mathbb{E} \left( g_T \mid x_1 = 0,x_2, \cdots, x_n \right) = \sum_{R \subset T \backslash \{1\}} \left( \hat{f}(R) + \hat{f}(R \cup \{1\}) \right) \cdot W_R
+				\end{equation}
+				And,
+				\begin{equation}
+					\mathbb{E} \left( g_T \mid x_1=0 \right) = \hat{f}(0) + \hat{f}(\{1\}) = \mathbb{E} f \cdot \left( 1 + (1-\alpha) \right) = (2-\alpha) \cdot \mathbb{E} f \geq \mathbb{E} f 
+				\end{equation}
+				In particular, using (19) from the original article, we have:				
 				\begin{equation} \label{entGtX0} \begin{aligned}
-					Ent \left( g_T | x_1 = 0,x_2, \cdots, x_n \right) 
+					Ent \left( g_T \mid x_1 = 0,x_2, \cdots, x_n \right) 
+					& \leq \frac{2}{ln 2} \cdot \frac{1}{\mathbb{E} \left( g_T \mid x_1=0 \right)} \cdot \sum_{R \subseteq {T\backslash \{1\}}} |R| \cdot \left( \hat{f} (R) + \hat{f} (R \cup \{1\}) \right)^2 \\ 
 					& \leq \frac{2}{ln 2} \cdot \frac{1}{\mathbb{E} f} \cdot \sum_{R \subseteq {T\backslash \{1\}}} |R| \cdot \left( \hat{f} (R) + \hat{f} (R \cup \{1\}) \right)^2 \\ 
 					& = \frac{4}{ln 2} \cdot \sum_{R \subseteq {T\backslash \{1\}}} |R| \cdot \left( \hat{f}^2 (R) + \hat{f}^2 (R \cup \{1\}) + 2 \cdot \hat{f}(R)  \cdot \hat{f} (R \cup \{1\}) \right) \\ 
 					& \leq \frac{8}{ln 2} \cdot \sum_{R \subseteq {T\backslash \{1\}}} |R| \cdot \left( \hat{f}^2 (R) + \hat{f}^2 (R \cup \{1\}) \right)
@@ -123,11 +134,46 @@
 				
 				Averaging over $T$ and depending on (\ref{boundForR}), (\ref{boundForR+1}) and (\ref{entGtX0}) we have:
 				\begin{equation} \label{final22} \begin{aligned}
-					\mathbb{E}_{T, 1 \notin T} Ent \left( g_T | x_1 = 0,x_2, \cdots, x_n \right)
+					\mathop{\mathbb{E}}_{T, 1 \notin T} Ent \left( g_T \mid x_1 = 0,x_2, \cdots, x_n \right)
 					& \leq \frac{8}{ln 2} \cdot \left( \left( 4 ( \lambda^2 \gamma ) + \left( 9 + \sqrt{17} \right)^2 \cdot \left( \lambda \gamma^2 log \left( \frac{1}{\gamma} \right) \right) \right)  + 4 \cdot \lambda \gamma \right) \\
 					& \leq \frac{8}{ln 2} \cdot \left( 4 \cdot \lambda \gamma + 64 \cdot \lambda \gamma + 4 \cdot \lambda \gamma \right) \\
 					& = \frac{576}{ln 2} \cdot \lambda \gamma < 831 \cdot \lambda \gamma
 				\end{aligned}			
 				\end{equation}
 			\end{proof}
+			
+			\subsubsection{Equation 23}
+				\begin{equation}
+					\mathop{\mathbb{E}}_{T,1 \in T} Ent \left( g_T \mid x_1 = 1,x_2, \cdots, x_n \right) \leq L \cdot \left( \lambda \gamma + \gamma^2 ln \left( \frac{1}{\gamma} \right) \right)
+				\end{equation}
+				\begin{proof}
+					Similarly to what we have in \ref{g_T with x1=0}, we have:
+					\begin{equation} \label{g_T with x1=1}
+						\mathbb{E} \left( g_T \mid x_1 = 1,x_2, \cdots, x_n \right) = \sum_{R \subset T \backslash \{1\}} \left( \hat{f}(R) - \hat{f}(R \cup \{1\}) \right) \cdot W_R
+					\end{equation}
+					So, depending on the definition of $\alpha$ and $\lambda$ (in our case, we always have $\alpha \geq \lambda$):
+					\begin{equation}
+						\mathbb{E} \left( g_T \mid x_1=1 \right) = \hat{f} (0) - \hat{f} (\{1\}) = \mathbb{E}f \cdot \left( 1 - \left (1- \alpha \right) \right) \geq \lambda \cdot \mathbb{E} f
+					\end{equation}
+					Applying (19) from the original paper, and averaging over $T$, we have:
+					%I'm not sure from the first inequality because (g_T|x_1=1) is not balanced... so its expectation is not 1/2. and we need to multiply by 1/'lambda because we are taking expectation, and this is the propability of taking T s.t. 1\in T (I think).
+					\begin{equation} \begin{aligned}
+						\mathop{\mathbb{E}}_{T,1 \in T} Ent \left( g_T \mid x_1 = 1,x_2, \cdots, x_n \right) 
+						& \leq \frac{2}{ln 2} \cdot \frac{1}{\mathbb{E} \left( g_T \mid x_1=1 \right)} \cdot \sum_{R \subseteq {T\backslash \{1\}}} |R| \cdot \left( \hat{f} (R) - \hat{f} (R \cup \{1\}) \right)^2 \\
+						& \leq \frac{4}{\lambda \cdot ln 2} \cdot \sum_{R \subseteq {T\backslash \{1\}}} |R| \cdot \left( \hat{f} (R) - \hat{f} (R \cup \{1\}) \right)^2 \\ 
+					\end{aligned} 
+					\end{equation}
+				\end{proof}
+				%I'm not sure why is g a boolean function... (next line)
+				Let $g = \mathbb{E} \left( f \mid x_1 = 1,x_2, \cdots, x_n \right)$, then: $g$ is a boolean function whose expectation equals to: $ \hat{f}(0) - \hat{f}(\{1\}) = \alpha \cdot \mathbb{E} f \leq \alpha $, similarly: $ \mathbb{E}g^2 = \mathbb{E}g \leq \alpha$
+				\paragraph{Inequality of Talagrand}
+					\textit{For a boolean function $g:\{0,1\}^m \rightarrow \{0,1\}$ with expectation $\mu \leq 1/2 $ holds $ \sum_{k=1}^m \hat{g}^2(\{k\}) \leq \left( 2 + \sqrt{2} \right)^2 \cdot \mu^2 \cdot ln(1/\mu).$ }
+				
+				\paragraph{}
+				So, in our case we have: %I'm not sure the last inequality is true.
+				\begin{equation}
+					 \sum_{k=2}^n \hat{g}^2 \left( \{k\} \right) \leq \left( 2 + \sqrt{2} \right)^2 \cdot \mathbb{E}^2 f \cdot ln \left( \frac{1}{\mathbb{E} f} \right) \leq \left( 2 + \sqrt{2} \right)^2 \cdot \alpha^2 \cdot ln \left( \frac{1}{\alpha} \right)
+				 \end{equation}
+				 
+				 
 \end{document}
