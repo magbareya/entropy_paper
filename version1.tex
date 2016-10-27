@@ -51,7 +51,7 @@
 				\begin{equation} \label{detailedConst}
 					\sum_{i \in \{0,1, \dots , n\} \backslash \{k\}} a_i^2 
 					\leq 2d^4log_2(2/d) 
-					\leq 2 \left( 9 + \sqrt{17} \right) ^ 2 \cdot \rho^4 log_2(2/\rho)
+					\leq 2 \left( 9 + \sqrt{17} \right) ^ 2 \cdot \rho^4 \cdot log_2(2/\rho)
 				\end{equation}
 	
 	
@@ -60,7 +60,7 @@
 		\subsection{Theorem 5.5}
 			Depending on (\ref{detailedConst}) we can restate theorem 5.5 to the following form:
 			\paragraph{Theorem 5.5:} \textit{For $ g: \{0,1\}^n \rightarrow \{-1,1\}$, let $\rho = \left( \sum_{A \subseteq [n]: |A| \geq 2} \hat{g}^2(A) \right) ^ {1/2} $. Then there exists some $ B \subseteq [n]$ with $|B| \leq 1$ such that:}
-				$$  \sum_{A \subseteq [n]: |A| \leq 1, A \neq B} \hat{g}^2 (A) \leq 2 \left( 9 + \sqrt{17} \right)^2 \cdot \rho^4 log \left( \frac{2}{\rho} \right) $$
+				$$  \sum_{A \subseteq [n]: |A| \leq 1, A \neq B} \hat{g}^2 (A) \leq 2 \left( 9 + \sqrt{17} \right)^2 \cdot \rho^4 \cdot log \left( \frac{2}{\rho} \right) $$
 	
 		\subsection{Equation (20)}
 			It is true with $L=2$ :
@@ -76,7 +76,7 @@
 			\begin{equation} \label{eq:21}
 				\sum_{k=2}^n \hat{f}^2 \left( \{k\} \right) 
 				\leq \sum_{k=2}^n \hat{g}^2 \left( \{k\} \right) 
-				\leq \left( 9 + \sqrt{17} \right) ^ 2 \cdot \gamma \cdot log \left( \frac{1}{\gamma} \right)
+				\leq \left( 9 + \sqrt{17} \right) ^ 2 \cdot \gamma ^2 \cdot log \left( \frac{1}{\gamma} \right)
 			\end{equation}
 	
 		\subsection{Proof of Lemma 5.2}
@@ -93,6 +93,12 @@
 		
 		\newpage
 		\subsection{Proof of Lemma 5.1}
+			\subsubsection{Lemma 5.1}
+				For constant $L$, and for $f$ that satisfies the conditions of theorem 1.14, we have:
+				\begin{equation} \label{Lemma5:1}
+					\mathop{\mathbb{E}}_{T,1 \in T} \left( Ent \left( f \mid T \right) - Ent \left( f \mid \{1\} \right) \right) \leq L \cdot \left( \lambda \gamma + \gamma^2 ln \left( \frac{1}{\gamma} \right) \right)
+				\end{equation}
+			
 			\subsubsection{Equation 22}
 				\begin{equation}
 					\mathop{\mathbb{E}}_{T,1 \in T} Ent \left( g_T \mid x_1 = 0,x_2, \cdots, x_n \right) \leq L \cdot \lambda \gamma
@@ -116,7 +122,7 @@
 				
 				If we fix a subset $T \subset [n]$ with $1 \in T$, then:
 				\begin{equation} \label{g_T with x1=0}
-					\mathbb{E} \left( g_T \mid x_1 = 0,x_2, \cdots, x_n \right) = \sum_{R \subset T \backslash \{1\}} \left( \hat{f}(R) + \hat{f}(R \cup \{1\}) \right) \cdot W_R
+					\mathbb{E} \left( g_T \mid x_1 = 0,x_2, \cdots, x_n \right) = \sum_{R \subseteq T \backslash \{1\}} \left( \hat{f}(R) + \hat{f}(R \cup \{1\}) \right) \cdot W_R
 				\end{equation}
 				And,
 				\begin{equation}
@@ -126,15 +132,15 @@
 				\begin{equation} \label{entGtX0} \begin{aligned}
 					Ent \left( g_T \mid x_1 = 0,x_2, \cdots, x_n \right) 
 					& \leq \frac{2}{ln 2} \cdot \frac{1}{\mathbb{E} \left( g_T \mid x_1=0 \right)} \cdot \sum_{R \subseteq {T\backslash \{1\}}} |R| \cdot \left( \hat{f} (R) + \hat{f} (R \cup \{1\}) \right)^2 \\ 
-					& \leq \frac{2}{ln 2} \cdot \frac{1}{\mathbb{E} f} \cdot \sum_{R \subseteq {T\backslash \{1\}}} |R| \cdot \left( \hat{f} (R) + \hat{f} (R \cup \{1\}) \right)^2 \\ 
-					& = \frac{4}{ln 2} \cdot \sum_{R \subseteq {T\backslash \{1\}}} |R| \cdot \left( \hat{f}^2 (R) + \hat{f}^2 (R \cup \{1\}) + 2 \cdot \hat{f}(R)  \cdot \hat{f} (R \cup \{1\}) \right) \\ 
-					& \leq \frac{8}{ln 2} \cdot \sum_{R \subseteq {T\backslash \{1\}}} |R| \cdot \left( \hat{f}^2 (R) + \hat{f}^2 (R \cup \{1\}) \right)
+					& \leq \frac{2}{ln 2} \cdot \frac{1}{\mathbb{E} f} \cdot \sum_{R \subseteq {T\backslash \{1\}}} |R| \lambda^{|R|} \left( \hat{f} (R) + \hat{f} (R \cup \{1\}) \right)^2 \\ 
+					& = \frac{4}{ln 2} \cdot \sum_{R \subseteq {T\backslash \{1\}}} |R| \lambda^{|R|} \left( \hat{f}^2 (R) + \hat{f}^2 (R \cup \{1\}) + 2 \cdot \hat{f}(R)  \cdot \hat{f} (R \cup \{1\}) \right) \\ 
+					& \leq \frac{8}{ln 2} \cdot \sum_{R \subseteq {T\backslash \{1\}}} |R| \lambda^{|R|}  \left( \hat{f}^2 (R) + \hat{f}^2 (R \cup \{1\}) \right)
 				\end{aligned}
 				\end{equation}
 				
 				Averaging over $T$ and depending on (\ref{boundForR}), (\ref{boundForR+1}) and (\ref{entGtX0}) we have:
 				\begin{equation} \label{final22} \begin{aligned}
-					\mathop{\mathbb{E}}_{T, 1 \notin T} Ent \left( g_T \mid x_1 = 0,x_2, \cdots, x_n \right)
+					\mathop{\mathbb{E}}_{T, 1 \in T} Ent \left( g_T \mid x_1 = 0,x_2, \cdots, x_n \right)
 					& \leq \frac{8}{ln 2} \cdot \left( \left( 4 ( \lambda^2 \gamma ) + \left( 9 + \sqrt{17} \right)^2 \cdot \left( \lambda \gamma^2 log \left( \frac{1}{\gamma} \right) \right) \right)  + 4 \cdot \lambda \gamma \right) \\
 					& \leq \frac{8}{ln 2} \cdot \left( 4 \cdot \lambda \gamma + 64 \cdot \lambda \gamma + 4 \cdot \lambda \gamma \right) \\
 					& = \frac{576}{ln 2} \cdot \lambda \gamma < 831 \cdot \lambda \gamma
@@ -155,25 +161,57 @@
 					\begin{equation}
 						\mathbb{E} \left( g_T \mid x_1=1 \right) = \hat{f} (0) - \hat{f} (\{1\}) = \mathbb{E}f \cdot \left( 1 - \left (1- \alpha \right) \right) \geq \lambda \cdot \mathbb{E} f
 					\end{equation}
+					Let $g = \mathbb{E} \left( f \mid x_1 = 1,x_2, \cdots, x_n \right)$. \\
 					Applying (19) from the original paper, and averaging over $T$, we have:
 					%I'm not sure from the first inequality because (g_T|x_1=1) is not balanced... so its expectation is not 1/2. and we need to multiply by 1/'lambda because we are taking expectation, and this is the propability of taking T s.t. 1\in T (I think).
-					\begin{equation} \begin{aligned}
+					\begin{equation} \label{Ent with x_1 = 1 V1} \begin{aligned}
 						\mathop{\mathbb{E}}_{T,1 \in T} Ent \left( g_T \mid x_1 = 1,x_2, \cdots, x_n \right) 
-						& \leq \frac{2}{ln 2} \cdot \frac{1}{\mathbb{E} \left( g_T \mid x_1=1 \right)} \cdot \sum_{R \subseteq {T\backslash \{1\}}} |R| \cdot \left( \hat{f} (R) - \hat{f} (R \cup \{1\}) \right)^2 \\
-						& \leq \frac{4}{\lambda \cdot ln 2} \cdot \sum_{R \subseteq {T\backslash \{1\}}} |R| \cdot \left( \hat{f} (R) - \hat{f} (R \cup \{1\}) \right)^2 \\ 
+						& \leq \frac{2}{ln 2} \cdot \frac{1}{\mathbb{E} \left( g_T \mid x_1=1 \right)} \cdot \sum_{R \subseteq {T\backslash \{1\}}} |R| \lambda^{|R|} \left( \hat{f} (R) - \hat{f} (R \cup \{1\}) \right)^2 \\
+						& \leq \frac{4}{\lambda \cdot ln 2} \cdot \sum_{R \subseteq {T\backslash \{1\}}} |R| \lambda^{|R|} \left( \hat{f} (R) - \hat{f} (R \cup \{1\}) \right)^2 \\ 
+						& = \frac{4}{\lambda \cdot ln 2} \cdot \sum_{R \subseteq {T\backslash \{1\}}} |R| \lambda^{|R|} \hat{g}^2 (R)
 					\end{aligned} 
 					\end{equation}
-				\end{proof}
 				%I'm not sure why is g a boolean function... (next line)
-				Let $g = \mathbb{E} \left( f \mid x_1 = 1,x_2, \cdots, x_n \right)$, then: $g$ is a boolean function whose expectation equals to: $ \hat{f}(0) - \hat{f}(\{1\}) = \alpha \cdot \mathbb{E} f \leq \alpha $, similarly: $ \mathbb{E}g^2 = \mathbb{E}g \leq \alpha$
+				$g$ is a boolean function whose expectation equals to: $ \hat{f}(0) - \hat{f}(\{1\}) = \alpha \cdot \mathbb{E} f \leq \alpha \leq \gamma $, similarly: $ \mathbb{E}g^2 = \mathbb{E}g \leq \alpha \leq \gamma$ (we depended on $\alpha \leq \gamma$. actually, in our case we have $\alpha = \gamma$)
 				\paragraph{Inequality of Talagrand}
 					\textit{For a boolean function $g:\{0,1\}^m \rightarrow \{0,1\}$ with expectation $\mu \leq 1/2 $ holds $ \sum_{k=1}^m \hat{g}^2(\{k\}) \leq \left( 2 + \sqrt{2} \right)^2 \cdot \mu^2 \cdot ln(1/\mu).$ }
 				
 				\paragraph{}
 				So, in our case we have: %I'm not sure the last inequality is true.
-				\begin{equation}
-					 \sum_{k=2}^n \hat{g}^2 \left( \{k\} \right) \leq \left( 2 + \sqrt{2} \right)^2 \cdot \mathbb{E}^2 f \cdot ln \left( \frac{1}{\mathbb{E} f} \right) \leq \left( 2 + \sqrt{2} \right)^2 \cdot \alpha^2 \cdot ln \left( \frac{1}{\alpha} \right)
+				\begin{equation} \begin{aligned} \label{Talagrand for g}
+					 \sum_{k=2}^n \hat{g}^2 \left( \{k\} \right) 
+					 & \leq \left( 2 + \sqrt{2} \right)^2 \cdot \mathbb{E}^2 f \cdot ln \left( \frac{1}{\mathbb{E} f} \right) 
+					 \leq \left( 2 + \sqrt{2} \right)^2 \cdot \alpha^2 \cdot ln \left( \frac{1}{\alpha} \right) \\
+					 & \leq \left( 2 + \sqrt{2} \right)^2 \cdot \gamma^2 \cdot ln \left( \frac{1}{\gamma} \right)
+				 \end{aligned}
 				 \end{equation}
 				 
+				 %I'm not sure we can use eq:20 here... because f_1 doesn't satisfy the conditions of theorem 1.14...
+				 Depending on (\ref{eq:20}) and (\ref{Talagrand for g}) we can continue (\ref{Ent with x_1 = 1 V1}) by:				 
+				 \begin{equation}\begin{aligned}
+					\mathop{\mathbb{E}}_{T,1 \in T} Ent \left( g_T \mid x_1 = 1,x_2, \cdots, x_n \right) 
+					& \leq \frac{4}{\lambda \cdot ln 2} \cdot \left( \lambda \cdot \sum_{k=2}^n \hat{g}^2 (\{k\}) + 2 \lambda^2 \sum_{|A| \geq 2} \hat{g}^2  \right) \\
+					& \leq \frac{4}{\lambda \cdot ln 2} \cdot \left( \left( 2 + \sqrt{2} \right)^2 \lambda \gamma^2 ln \left( \frac{1}{\gamma} \right) + 4 \lambda^2 \gamma  \right) \\
+					& = \frac{16}{ln 2} \cdot \left( \left( 1 + \frac{1}{\sqrt{2}} \right)^2 \gamma^2 ln \left( \frac{1}{\gamma} \right) + \lambda \gamma  \right) \\
+					& \leq \frac{16}{ln 2} \cdot \left( 3 \cdot \gamma^2 ln \left( \frac{1}{\gamma} \right) + \lambda \gamma  \right) \\
+					%here we can take a smaller constant if we assume lower bound on lambda, e.g. if we require \lambda \geq 1/2, we can replace 48 by 30.
+					& \leq \frac{48}{ln 2} \cdot \left( \gamma^2 ln \left( \frac{1}{\gamma} \right) + \lambda \gamma  \right)
+				\end{aligned}
+				 \end{equation}
+				 \end{proof}
+				 
+				 \subsubsection{Proof of the lemma}
+				 	Let $g_T = \mathbb{E} \left( f \mid T \right)$ for a subset $T \subseteq [n]$. Note that if $1 \in T$ then $ \mathbb{E} \left( g_T \mid \{1\} \right) =  \mathbb{E} \left( f \mid \{1\} \right) $. 
+				 	
+				 	\paragraph{}
+				 	Hence:
+				 	\begin{equation} \begin{aligned}
+				 		& \mathop{\mathbb{E}}_{T,1 \in T} \left( Ent \left( f \mid T \right) - Ent \left( f \mid \{1\} \right) \right) =
+				 		\mathop{\mathbb{E}}_{T,1 \in T} \left( Ent \left( g_T \mid T \right) - Ent \left( g_T \mid \{1\} \right) \right) = \\
+				 		& \frac{1}{2} \cdot \mathop{\mathbb{E}}_{T,1 \in T} Ent \left( g_T \mid x_1 = 0,x_2, \cdots, x_n \right) + \frac{1}{2} \mathop{\mathbb{E}}_{T,1 \in T} Ent \left( g_T \mid x_1 = 1,x_2, \cdots, x_n \right) \\
+				 		& \leq \frac{288}{ln2} \cdot \lambda \gamma + \frac{8}{ln2} \cdot \left( 3 \cdot \gamma^2 ln \left( \frac{1}{\gamma} \right) + \lambda \gamma  \right)
+				 		= \frac{296}{ln2} \cdot \lambda \gamma +\frac{24}{ln2} \cdot \gamma^2 ln \left( \frac{1}{\gamma} \right) 
+				 	\end{aligned} 
+				 	\end{equation}
 				 
 \end{document}
